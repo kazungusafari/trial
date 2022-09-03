@@ -13,8 +13,8 @@ const config = {
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
 	favicon: "img/favicon.ico",
-	organizationName: "https://github.com/kazungusafari", // Usually your GitHub org/user name.
-	projectName: "https://github.com/kazungusafari/trial", // Usually your repo name.
+	organizationName: "kazungusafari", // Usually your GitHub org/user name.
+	projectName: "trial", // Usually your repo name.
 
 	presets: [
 		[
