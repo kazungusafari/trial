@@ -1,6 +1,6 @@
 ---
-slug: mdx-blog-post
-title: MDX Blog Post
+slug: Higher Order Component Pattern
+title: Higher Order Component Pattern
 authors: [slorber]
 tags: [docusaurus]
 ---
