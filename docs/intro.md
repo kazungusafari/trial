@@ -34,11 +34,11 @@ export default function Example() {
         <FormField
           name="email"
          >
-          {({ getFormFieldProps}) => (
+          {({ getFieldProps}) => (
             <label>
               Email:
               <input
-                {...getFormFieldProps()}
+                {...getFieldProps()}
                 type="email"
               />
             </label>
@@ -47,11 +47,11 @@ export default function Example() {
         <FormField
           name="username"
         >
-          {({ getFormFieldProps }) => (
+          {({ getFieldProps }) => (
             <label>
               Username:
               <input
-                {...getFormFieldProps()}
+                {...getFieldProps()}
                 type="text"
               />
         </FormField>
@@ -104,7 +104,7 @@ The FormField must wrap your form fields.`It takes the name and validation rules
 - fieldValue.The value of the form field
 - fieldName.The name of the form field
 - fieldHandler.This is an onchange function handler
-- getFormFieldProps .This is function that returns the object shown below
+- getFieldProps .This is function that returns the object shown below
 
 ```js
 const obj = { value: fieldValue, onChange: fieldHandler, name: fieldName };
@@ -166,7 +166,7 @@ export default function Example() {
 
 ### What does this callback take ?
 
-It takes the known goodies from FormField.For example one of the goodies is `getFormFieldProps`
+It takes the known goodies from FormField.For example one of the goodies is `getFieldProps`
 
 ```js
 import { Form, FormField } from "@formfield/react";
@@ -183,8 +183,8 @@ export default function Example() {
 
 	return (
 		<Form onSubmit={onSubmit} initialValues={initialValues}>
-			<FormField name="username">{({ getFormFieldProps }) => {}}</FormField>
-			<FormField name="email">{({ getFormFieldProps }) => {}}</FormField>
+			<FormField name="username">{({ getFieldProps }) => {}}</FormField>
+			<FormField name="email">{({ getFieldProps }) => {}}</FormField>
 		</Form>
 	);
 }
@@ -215,7 +215,7 @@ export default function Example() {
         <FormField
           name="email"
          >
-          {({ getFormFieldProps}) => (
+          {({ getFieldProps}) => (
             <label>
               Email:
               <input
@@ -227,7 +227,7 @@ export default function Example() {
         <FormField
           name="username"
         >
-          {({ getFormFieldProps }) => (
+          {({ getFieldProps }) => (
             <label>
               Username:
               <input
@@ -243,7 +243,7 @@ export default function Example() {
 }
 ```
 
-## GetFormFieldProps
+## getFieldProps
 
 This a function when called return an object with following properties
 
@@ -279,11 +279,11 @@ export default function Example() {
         <FormField
           name="email"
          >
-          {({ getFormFieldProps}) => (
+          {({ getFieldProps}) => (
             <label>
               Email:
               <input
-                {...getFormFieldProps()}
+                {...getFieldProps()}
                 type="email"
               />
             </label>
@@ -292,11 +292,11 @@ export default function Example() {
         <FormField
           name="username"
         >
-          {({ getFormFieldProps }) => (
+          {({ getFieldProps }) => (
             <label>
               Username:
               <input
-               {...getFormFieldProps()}
+               {...getFieldProps()}
                 type="text"
               />
 			 </label>
@@ -345,11 +345,11 @@ export default function Example() {
             FormRules.required('Email is required'),
             FormRules.email("Provide a correct email")]}
          >
-          {({ getFormFieldProps}) => (
+          {({ getFieldProps}) => (
             <label>
               Email:
               <input
-                {...getFormFieldProps()}
+                {...getFieldProps()}
                 type="email"
               />
             </label>
@@ -362,14 +362,14 @@ export default function Example() {
             FormRules.minLength(4,'Minimum length of username characters is four')
             ]}
         >
-          {({ getFormFieldProps }) => (
+          {({ getFieldProps }) => (
             <label>
               Username:
               <input
-               {...getFormFieldProps()}
+               {...getFieldProps()}
                 type="text"
               />
-			 </label>
+			 </label>)}
         </FormField>
         <button type="submit">
           Sign Up
@@ -386,66 +386,60 @@ We want to show form element's error if it has any error
 
 ```javascript
 
-import { Form, FormField } from "@formfield/react";
+import { Form, FormField,FormRules } from "@formfield/react";
 
 export default function Example() {
-	const onSubmit = (data) => {
-		console.log(data);
-	};
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
-	const initialValues = {
-		username: "",
-		email: "",
-	};
+  const initialValues = {
+    username: "",
+    email: ""
+  };
 
-	return (
-		 <Form
-          onSubmit={onSubmit}
-          initialValues={initialValues}
-         >
-        <FormField
-          name="email"
-          rules={[
-            FormRules.required('Email is required'),
-            FormRules.email("Provide a correct email")]}
-         >
-          {({ getFormFieldProps,fieldHasErrors,fieldErrors}) => (
-            <>
+  return (
+    <Form onSubmit={onSubmit} initialValues={initialValues}>
+      <FormField
+        name="email"
+        rules={[
+          FormRules.required("Email is required"),
+          FormRules.email("Provide a correct email")
+        ]}
+      >
+        {({ getFieldProps, fieldHasErrors, fieldErrors }) => (
+          <>
             <label>
               Email:
-              <input
-                {...getFormFieldProps()}
-                type="email"
-              />
+              <input {...getFieldProps()} type="email" />
             </label>
             {fieldHasErrors && <span>{fieldErrors}</span>}
-            </>
-          )}
-        </FormField>
-        <FormField
-          name="username"
-          rules ={[
-            FormRules.required('Username is required')
-            FormRules.minLength(4,'Minimum length of username characters is four')
-            ]}
-        >
-          {({ getFormFieldProps,fieldHasErrors,fieldErrors }) => (
-            <>
+          </>
+        )}
+      </FormField>
+      <FormField
+        name="username"
+        rules={[
+          FormRules.required("Username is required"),
+          FormRules.minLength(
+            4,
+            "Minimum length of username characters is four"
+          )
+        ]}
+      >
+        {({ getFieldProps, fieldHasErrors, fieldErrors }) => (
+          <>
             <label>
               Username:
-              <input
-               {...getFormFieldProps()}
-                type="text"
-              />
-		    	 </label>
-           {fieldHasErrors && <span>{fieldErrors}</span>}
-       </>
-        </FormField>
-        <button type="submit">
-          Sign Up
-        </button>
-      </Form>
-	);
+              <input {...getFieldProps()} type="text" />
+            </label>
+            {fieldHasErrors && <span>{fieldErrors}</span>}
+          </>
+        )}
+      </FormField>
+      <button type="submit">Sign Up</button>
+    </Form>
+  );
 }
 
 ```
