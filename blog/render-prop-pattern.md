@@ -1,6 +1,6 @@
 ---
-slug: long-blog-post
-title: Long Blog Post
+slug: Render Prop Pattern
+title: Render Prop Pattern
 authors: endi
 tags: [hello, docusaurus]
 ---
